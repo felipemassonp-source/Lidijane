@@ -294,13 +294,6 @@ p { margin: 0 0 1em; }
 .svc-row__arr { width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; transition: background .4s, border-color .4s, transform .5s var(--ease); }
 .svc-row:hover .svc-row__arr { background: var(--coral); border-color: var(--coral); color: var(--white); transform: rotate(-45deg); }
 .svc-row__arr svg { width: 20px; height: 20px; }
-.svc-preview {
-  position: fixed; top: 0; left: 0; width: 280px; height: 340px; border-radius: var(--radius);
-  overflow: hidden; pointer-events: none; z-index: 300; opacity: 0; scale: .6;
-}
-.svc-preview__inner { position: absolute; inset: 0; display: flex; flex-direction: column; }
-.svc-preview__panel { flex: 0 0 100%; display: grid; place-items: center; padding: 30px; }
-.svc-preview__panel .board { width: 100%; }
 
 /* ---------- Cards de entrada (home -> curso / ferramentas) ---------- */
 .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -556,7 +549,6 @@ p { margin: 0 0 1em; }
   .svc-row { grid-template-columns: 44px 1fr 54px; gap: 16px; padding: 28px 0; }
   .svc-row p { grid-column: 2 / 3; }
   .svc-row__arr { grid-row: 1; grid-column: 3; }
-  .svc-preview { display: none; }
   .door { min-height: 460px; }
   .svc-block__side { position: static; }
   .flow { grid-template-columns: 1fr; gap: 30px; }
@@ -587,7 +579,6 @@ p { margin: 0 0 1em; }
    Ajustes integrados ao JS
    ========================================================= */
 .cursor { width: 84px; height: 84px; margin: -42px 0 0 -42px; }
-.svc-preview { scale: none; }
 .js .transition span { transform: scaleY(1); }
 .tool { transition: translate .5s var(--ease), box-shadow .5s var(--ease); }
 .tool:hover { transform: none; translate: 0 -6px; }

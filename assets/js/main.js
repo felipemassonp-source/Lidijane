@@ -333,21 +333,6 @@ const CONFIG = {
   }
 
   function pageSpecific() {
-    /* Lista de serviços com prévia flutuante */
-    const list = $(".svc-list"), prev = $(".svc-preview");
-    if (list && prev && !isTouch) {
-      const inner = $(".svc-preview__inner", prev);
-      gsap.set(prev, { scale: 0.6 });
-      const xTo = gsap.quickTo(prev, "x", { duration: 0.7, ease: "power3" });
-      const yTo = gsap.quickTo(prev, "y", { duration: 0.7, ease: "power3" });
-      list.addEventListener("mousemove", (e) => { xTo(e.clientX + 40); yTo(e.clientY - 170); });
-      list.addEventListener("mouseenter", () => gsap.to(prev, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }));
-      list.addEventListener("mouseleave", () => gsap.to(prev, { opacity: 0, scale: 0.6, duration: 0.4, ease: "power3.in" }));
-      $$(".svc-row", list).forEach((r, i) =>
-        r.addEventListener("mouseenter", () => gsap.to(inner, { yPercent: -100 * i, duration: 0.7, ease: "power4.inOut" }))
-      );
-    }
-
     /* Fluxo "antes da prancha" */
     const flow = $(".flow");
     if (flow) {
