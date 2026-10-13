@@ -5,8 +5,15 @@ const CONFIG = {
   // Número do WhatsApp com DDI + DDD, só números. Ex.: 5584999999999
   whatsapp: "5500000000000",
   whatsMsg: "Olá, Lidijane! Vim pelo site e gostaria de saber mais sobre ",
-  // Checkout do curso (Kiwify)
+  // Checkout do curso (Kiwify) — perpétuo R$ 247.
+  // (Checkout da campanha 20% OFF da Semana do CAA: https://pay.kiwify.com.br/Y2MQqyI)
   checkout: "https://pay.kiwify.com.br/nOLIqqA",
+  // Preço exibido em todo o site (altere aqui e todas as páginas atualizam)
+  price: {
+    cash: "R$ 247",            // à vista
+    instCount: "12x",          // nº de parcelas
+    instValue: "25,55",        // valor da parcela (sem R$)
+  },
 };
 
 (() => {
@@ -32,6 +39,15 @@ const CONFIG = {
     a.rel = "noopener";
   });
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+  const [instInt, instCents] = CONFIG.price.instValue.split(",");
+  const priceMap = {
+    cash: CONFIG.price.cash,
+    "inst-count": CONFIG.price.instCount,
+    "inst-value": "R$ " + CONFIG.price.instValue,
+    "inst-int": instInt,
+    "inst-cents": "," + (instCents || "00"),
+  };
+  $$("[data-price]").forEach((el) => { if (priceMap[el.dataset.price]) el.textContent = priceMap[el.dataset.price]; });
 
   /* ---------- Pranchas de CAA (assinatura visual) ---------- */
   const s = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -411,8 +427,9 @@ const CONFIG = {
         });
       };
       btns.forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter)));
-      const map = { profissionais: "pro", familias: "fam" };
-      apply(map[location.hash.slice(1)] || "all", true);
+      const valid = btns.map((b) => b.dataset.filter);
+      const h = location.hash.slice(1);
+      apply(valid.includes(h) ? h : "all", true);
       addEventListener("resize", () => movePill($(".is-active", filter), true));
       $$("[data-go-filter]").forEach((b) => b.addEventListener("click", () => {
         const target = $("#biblioteca");
