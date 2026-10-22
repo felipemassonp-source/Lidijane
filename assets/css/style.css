@@ -179,14 +179,17 @@ p { margin: 0 0 1em; }
 .mobile-menu a.big { display: block; font-family: var(--serif); font-size: clamp(44px, 12vw, 72px); line-height: 1.15; }
 .mobile-menu a.big em { color: var(--coral); }
 
-/* ---------- Transição de página ---------- */
+/* ---------- Transição de página (Cores oficiais da marca) ---------- */
 .transition {
   position: fixed; inset: 0; z-index: 8000; pointer-events: none;
   display: grid; grid-template-columns: repeat(5, 1fr);
 }
-.transition span { background: var(--green-deep); transform: scaleY(0); transform-origin: bottom; }
-.transition span:nth-child(2) { background: var(--green); }
-.transition span:nth-child(4) { background: var(--green); }
+.transition span { transform: scaleY(0); transform-origin: bottom; }
+.transition span:nth-child(1) { background: #DF8A42; } /* Terracota */
+.transition span:nth-child(2) { background: #44AD9F; } /* Verde-água */
+.transition span:nth-child(3) { background: #EC9D95; } /* Rosa Blush */
+.transition span:nth-child(4) { background: #F37C7A; } /* Coral */
+.transition span:nth-child(5) { background: #DF8A42; } /* Terracota */
 
 /* ---------- Cursor ---------- */
 .cursor {
