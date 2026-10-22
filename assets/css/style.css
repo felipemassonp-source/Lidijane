@@ -882,3 +882,10 @@ html.lenis, html.lenis body { height: auto; }
   .fronts, .svc-index, .legend, .proof-strip__grid { grid-template-columns: 1fr; }
   .proof-strip__item, .proof-strip__item:nth-child(3) { padding: 20px 0; border-right: 0; border-bottom: 1px solid var(--line); }
 }
+
+/* Logo oficial */
+.brand__logo { display: block; height: 62px; width: auto; transition: height .4s; }
+.nav.is-scrolled .brand__logo { height: 48px; }
+.footer .brand__logo { height: 72px; }
+@media (max-width: 600px) { .brand__logo { height: 42px; } }
+
