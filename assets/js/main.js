@@ -5,14 +5,14 @@ const CONFIG = {
   // Número do WhatsApp com DDI + DDD, só números. Ex.: 5584999999999
   whatsapp: "5500000000000",
   whatsMsg: "Olá, Lidijane! Vim pelo site e gostaria de saber mais sobre ",
-  // Checkout do curso (Kiwify) — perpétuo R$ 247.
-  // (Checkout da campanha 20% OFF da Semana do CAA: https://pay.kiwify.com.br/Y2MQqyI)
-  checkout: "https://pay.kiwify.com.br/nOLIqqA",
+  // Checkout do curso (Kiwify) — perpétuo R$ 339,90.
+  checkout: "https://pay.kiwify.com.br/nOxvmET",
+  couponVault: { s: "MddAZ4JjNbZhgRvlEGAVOw==", i: "5dud+CwaqyUUA++1", c: "AI2RpfapHew0D9eWLrtkzGmT6on+vn/F4EprfZM5QvLS21KRNGvvV+4tK7IQa7Yr1A==" },
   // Preço exibido em todo o site (altere aqui e todas as páginas atualizam)
   price: {
-    cash: "R$ 247",            // à vista
+    cash: "R$ 339,90",         // à vista
     instCount: "12x",          // nº de parcelas
-    instValue: "25,55",        // valor da parcela (sem R$)
+    instValue: "35,16",        // valor da parcela (sem R$)
   },
 };
 
@@ -48,6 +48,75 @@ const CONFIG = {
     "inst-cents": "," + (instCents || "00"),
   };
   $$("[data-price]").forEach((el) => { if (priceMap[el.dataset.price]) el.textContent = priceMap[el.dataset.price]; });
+
+  /* ---------- Cupom criptografado (AES-GCM + PBKDF2) ---------- */
+  const couponForm = $("#coupon-form");
+  if (couponForm) {
+    const input = $("#coupon-input");
+    const msg = $("#coupon-msg");
+    const unlockBox = $("#coupon-unlock");
+    const ctaBtn = $("#coupon-cta");
+    const fromB64 = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+
+    const tryUnlock = async (rawCode) => {
+      const code = (rawCode || "").trim().toLowerCase();
+      if (!code || !window.crypto || !crypto.subtle) return false;
+      try {
+        const keyMat = await crypto.subtle.importKey("raw", new TextEncoder().encode(code), "PBKDF2", false, ["deriveKey"]);
+        const key = await crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt: fromB64(CONFIG.couponVault.s), iterations: 100000, hash: "SHA-256" },
+          keyMat,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["decrypt"]
+        );
+        const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv: fromB64(CONFIG.couponVault.i) }, key, fromB64(CONFIG.couponVault.c));
+        const unlockedUrl = new TextDecoder().decode(dec);
+        if (!unlockedUrl.startsWith("https://")) return false;
+        const u = new URL(unlockedUrl);
+        passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid)/.test(k)) u.searchParams.set(k, v); });
+        ctaBtn.href = u.toString();
+        return true;
+      } catch (_) {
+        return false;
+      }
+    };
+
+    couponForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+      input.classList.remove("is-error");
+      const ok = await tryUnlock(input.value);
+      if (ok) {
+        input.classList.add("is-valid");
+        input.readOnly = true;
+        const submitBtn = $("button", couponForm);
+        if (submitBtn) {
+          submitBtn.textContent = "Aplicado ✓";
+          submitBtn.disabled = true;
+        }
+        unlockBox.hidden = false;
+        if (!reduce && window.gsap) {
+          gsap.fromTo(unlockBox, { opacity: 0, y: -10, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.7)" });
+        }
+      } else {
+        unlockBox.hidden = true;
+        input.classList.remove("is-valid");
+        input.classList.add("is-error");
+        msg.textContent = "Cupom inválido ou expirado.";
+        if (!reduce && window.gsap) {
+          gsap.fromTo(couponForm, { x: -7 }, { x: 0, duration: 0.4, ease: "elastic.out(1, 0.25)" });
+        }
+      }
+    });
+
+    input.addEventListener("input", () => {
+      if (input.classList.contains("is-error")) {
+        input.classList.remove("is-error");
+        msg.textContent = "";
+      }
+    });
+  }
 
   /* ---------- Pranchas de CAA (assinatura visual) ---------- */
   const s = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
