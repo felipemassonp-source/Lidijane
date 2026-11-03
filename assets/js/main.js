@@ -3,7 +3,7 @@
    ========================================================= */
 const CONFIG = {
   // Número do WhatsApp com DDI + DDD, só números. Ex.: 5584999999999
-  whatsapp: "5500000000000",
+  whatsapp: "5511958529269",
   whatsMsg: "Olá, Lidijane! Vim pelo site e gostaria de saber mais sobre ",
   // Checkout do curso (Kiwify) — perpétuo R$ 339,90.
   checkout: "https://pay.kiwify.com.br/nOxvmET",
@@ -508,17 +508,40 @@ const CONFIG = {
     }
   }
 
-  /* ---------- Formulário de captura (placeholder) ---------- */
+  /* ---------- Formulário de captura ---------- */
   $$("form[data-capture]").forEach((f) =>
     f.addEventListener("submit", (e) => {
       e.preventDefault();
       if (typeof fbq === "function") {
         fbq("track", "Lead", { content_name: "Materiais Gratuitos CAA" });
       }
-      // TODO: integrar com a ferramenta de e-mail (RD Station, ActiveCampaign, Mailchimp...)
+      const nome = ($('input[name="nome"]', f)?.value || "").trim();
+      const email = ($('input[name="email"]', f)?.value || "").trim();
+      const perfilInput = $('input[name="perfil"]:checked', f);
+      const perfilLabels = {
+        fono: "Fonoaudióloga",
+        familia: "Mãe / Pai",
+        professor: "Professor(a)",
+        outro: "Outro profissional",
+      };
+      const perfil = perfilLabels[perfilInput?.value] || "Interessado(a) em CAA";
+      const msg = `Olá, Lidijane! Meu nome é ${nome || "Visitante"} (${perfil}) e me cadastrei no site para receber os materiais de CAA.`;
+      const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
       gsap.to(f, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
-        f.innerHTML = '<p class="display" style="font-size:32px;line-height:1.15">Prontinho! 💚<br><span class="muted" style="font-family:var(--sans);font-size:17px">Você vai receber os materiais no seu e-mail.</span></p>';
+        f.innerHTML = `
+          <div style="text-align:center;padding:12px 0">
+            <p class="display" style="font-size:30px;line-height:1.2;margin-bottom:12px">Prontinho! 💚</p>
+            <p class="muted" style="font-family:var(--sans);font-size:16px;margin-bottom:20px">Redirecionando para o WhatsApp da Lidijane...</p>
+            <a href="${waUrl}" class="btn btn--coral btn-whatsapp" id="btn-whatsapp" style="display:inline-flex;justify-content:center">
+              Abrir WhatsApp agora
+              <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        `;
         gsap.to(f, { opacity: 1, y: 0, duration: 0.5 });
+        setTimeout(() => {
+          window.location.href = waUrl;
+        }, 1200);
       } });
     })
   );
