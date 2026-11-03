@@ -1,0 +1,7 @@
+# Cloudflare Pages Redirects / Rewrites
+/servicos-clinicos    /servicos.html      200
+/curso-caa            /curso.html         200
+/servicos             /servicos.html      200
+/curso                /curso.html         200
+/ferramentas          /ferramentas.html   200
+/obrigado             /obrigado.html      200

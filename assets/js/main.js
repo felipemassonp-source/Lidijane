@@ -31,12 +31,27 @@ const CONFIG = {
     const u = new URL(CONFIG.checkout);
     passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid)/.test(k)) u.searchParams.set(k, v); });
     a.href = u.toString();
+    a.addEventListener("click", () => {
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          content_name: "Curso CAA: Para Além de Pictogramas",
+          currency: "BRL",
+          value: 339.90,
+        });
+      }
+    });
   });
   $$("[data-wa]").forEach((a) => {
     const topic = a.dataset.wa || "seus atendimentos";
     a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.whatsMsg + topic + ".")}`;
     a.target = "_blank";
     a.rel = "noopener";
+    a.addEventListener("click", () => {
+      if (typeof fbq === "function") {
+        fbq("track", "Contact", { content_name: topic });
+        fbq("track", "Lead", { content_name: "WhatsApp: " + topic });
+      }
+    });
   });
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
   const [instInt, instCents] = CONFIG.price.instValue.split(",");
@@ -497,6 +512,9 @@ const CONFIG = {
   $$("form[data-capture]").forEach((f) =>
     f.addEventListener("submit", (e) => {
       e.preventDefault();
+      if (typeof fbq === "function") {
+        fbq("track", "Lead", { content_name: "Materiais Gratuitos CAA" });
+      }
       // TODO: integrar com a ferramenta de e-mail (RD Station, ActiveCampaign, Mailchimp...)
       gsap.to(f, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
         f.innerHTML = '<p class="display" style="font-size:32px;line-height:1.15">Prontinho! 💚<br><span class="muted" style="font-family:var(--sans);font-size:17px">Você vai receber os materiais no seu e-mail.</span></p>';

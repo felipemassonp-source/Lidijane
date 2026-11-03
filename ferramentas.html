@@ -12,6 +12,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..500,0..100,0..1;1,9..144,300..500,0..100,0..1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},3000)</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '3195814143953340');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=3195814143953340&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -229,7 +246,7 @@
             <h2 style="margin:22px 0 20px;font-size:clamp(36px,4.4vw,64px)">Receba os materiais no seu <em>e-mail.</em></h2>
             <p class="muted">Conte quem você é e eu envio os materiais certos para você, além dos lançamentos de novas ferramentas.</p>
           </div>
-          <form data-capture>
+          <form data-capture id="form-lead">
             <input class="field" type="text" name="nome" placeholder="Seu nome" required>
             <input class="field" type="email" name="email" placeholder="Seu melhor e-mail" required>
             <div class="radios" role="radiogroup" aria-label="Eu sou">
@@ -238,7 +255,7 @@
               <label><input type="radio" name="perfil" value="professor"><span>Professor(a)</span></label>
               <label><input type="radio" name="perfil" value="outro"><span>Outro profissional</span></label>
             </div>
-            <button type="submit" class="btn btn--coral" style="justify-content:center;margin-top:6px" data-magnetic>Quero receber
+            <button type="submit" id="btn-form" class="btn btn--coral" style="justify-content:center;margin-top:6px" data-magnetic>Quero receber
               <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </form>
         </div>
@@ -255,7 +272,7 @@
         </div>
         <div><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
         <div><h4>Ferramentas</h4><ul><li><a href="#biblioteca">Biblioteca</a></li><li><a href="#captura">Materiais gratuitos</a></li></ul></div>
-        <div><h4>Contato</h4><ul><li><a href="#" data-wa="as ferramentas de CAA">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+        <div><h4>Contato</h4><ul><li><a href="#" data-wa="as ferramentas de CAA" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
       </div>
       <div class="footer__big">Para além <em>de pictogramas.</em></div>
       <div class="footer__bottom">

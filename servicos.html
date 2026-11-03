@@ -12,6 +12,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..500,0..100,0..1;1,9..144,300..500,0..100,0..1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},3000)</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '3195814143953340');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=3195814143953340&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -28,7 +45,7 @@
       <li><a href="curso.html">Curso de CAA</a></li>
       <li><a href="ferramentas.html">Ferramentas</a></li>
     </ul>
-    <a href="#" data-wa="um agendamento" class="btn nav__cta" data-magnetic>Agendar</a>
+    <a href="#" data-wa="um agendamento" class="btn nav__cta btn-whatsapp" id="btn-whatsapp-nav" data-magnetic>Agendar</a>
     <button class="nav__burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="mobile-menu">
@@ -39,7 +56,7 @@
       <li><a class="big" href="ferramentas.html">Ferramentas</a></li>
     </ul>
     <div class="mobile-menu__foot">
-      <a href="#" data-wa="um agendamento" class="btn btn--coral">Agendar pelo WhatsApp</a>
+      <a href="#" data-wa="um agendamento" class="btn btn--coral btn-whatsapp">Agendar pelo WhatsApp</a>
       <a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener" class="link-u" style="justify-self:center">@lidijanearaujofono</a>
     </div>
   </div>
@@ -54,7 +71,7 @@
         <h1 data-intro-split>Serviços <em>clínicos</em> em fonoaudiologia e CAA.</h1>
         <div class="phero__row">
           <p class="lead" data-intro-fade>Atendimentos realizados pela própria Lidijane Araújo Galvão, fonoaudióloga especialista em Comunicação Aumentativa e Alternativa. Cada serviço parte de uma avaliação cuidadosa e de decisões baseadas em evidência.</p>
-          <a href="#" data-wa="os serviços clínicos" class="btn btn--coral" data-magnetic data-intro-fade>Agendar pelo WhatsApp
+          <a href="#" data-wa="os serviços clínicos" class="btn btn--coral btn-whatsapp" id="btn-whatsapp" data-magnetic data-intro-fade>Agendar pelo WhatsApp
             <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
@@ -112,7 +129,7 @@
               <li><div><b>Barreiras e facilitadores</b><span>Mapeamento em casa, na terapia e na escola.</span></div></li>
               <li><div><b>Relatório e plano de intervenção</b><span>O sistema de CAA indicado, e o porquê de cada escolha.</span></div></li>
             </ol>
-            <a href="#" data-wa="a avaliação em CAA" class="btn" data-magnetic>Agendar avaliação
+            <a href="#" data-wa="a avaliação em CAA" class="btn btn-whatsapp" data-magnetic>Agendar avaliação
               <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </article>
@@ -137,7 +154,7 @@
               <li><div><b>Treino de parceiros de comunicação</b><span>Família, equipe multidisciplinar e escola falando a mesma língua.</span></div></li>
               <li><div><b>Evolução acompanhada</b><span>Registros objetivos para enxergar o progresso de verdade.</span></div></li>
             </ol>
-            <a href="#" data-wa="a terapia fonoaudiológica" class="btn" data-magnetic>Quero saber sobre a terapia
+            <a href="#" data-wa="a terapia fonoaudiológica" class="btn btn-whatsapp" data-magnetic>Quero saber sobre a terapia
               <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </article>
@@ -162,7 +179,7 @@
               <li><div><b>Plano e sistema de CAA</b><span>Seleção de recurso, vocabulário, acesso e estratégias.</span></div></li>
               <li><div><b>Acompanhamento</b><span>Encontros recorrentes para acompanhar a evolução dos casos.</span></div></li>
             </ol>
-            <a href="#" data-wa="a supervisão clínica" class="btn" data-magnetic>Quero supervisão
+            <a href="#" data-wa="a supervisão clínica" class="btn btn-whatsapp" data-magnetic>Quero supervisão
               <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </article>
@@ -187,7 +204,7 @@
               <li><div><b>Implementação acompanhada</b><span>Suporte para colocar a CAA em prática no dia a dia.</span></div></li>
               <li><div><b>Materiais de apoio</b><span>Checklists, registros e recursos para a equipe usar.</span></div></li>
             </ol>
-            <a href="#" data-wa="treinamentos para equipes" class="btn" data-magnetic>Solicitar proposta
+            <a href="#" data-wa="treinamentos para equipes" class="btn btn-whatsapp" data-magnetic>Solicitar proposta
               <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </article>
@@ -212,7 +229,7 @@
         </div>
         <div class="flow-end" data-reveal>
           <p>Tem dúvida sobre qual serviço é o ideal? <em style="color:var(--sun)">A gente te ajuda a escolher.</em></p>
-          <a href="#" data-wa="qual serviço é o mais indicado para mim" class="btn btn--light" data-magnetic>Falar com a equipe
+          <a href="#" data-wa="qual serviço é o mais indicado para mim" class="btn btn--light btn-whatsapp" data-magnetic>Falar com a equipe
             <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
@@ -245,7 +262,7 @@
         </div>
         <div><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
         <div><h4>Serviços clínicos</h4><ul><li><a href="#avaliacao">Avaliação em CAA</a></li><li><a href="#atendimento">Terapia fonoaudiológica</a></li><li><a href="#supervisao">Supervisão clínica</a></li><li><a href="#treinamentos">Treinamento de equipes</a></li></ul></div>
-        <div><h4>Contato</h4><ul><li><a href="#" data-wa="seus atendimentos">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+        <div><h4>Contato</h4><ul><li><a href="#" data-wa="seus atendimentos" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
       </div>
       <div class="footer__big">Para além <em>de pictogramas.</em></div>
       <div class="footer__bottom">

@@ -14,6 +14,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..500,0..100,0..1;1,9..144,300..500,0..100,0..1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},3000)</script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '3195814143953340');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=3195814143953340&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -548,7 +565,7 @@
         <div>
           <span class="kicker" data-reveal>Perguntas frequentes</span>
           <h2 data-split style="margin:22px 0 30px">Ficou alguma <em>dúvida?</em></h2>
-          <a href="#" data-wa="o curso CAA: Para Além de Pictogramas" class="btn btn--ghost" data-reveal data-magnetic>Falar com a equipe no WhatsApp</a>
+          <a href="#" data-wa="o curso CAA: Para Além de Pictogramas" class="btn btn--ghost btn-whatsapp" id="btn-whatsapp" data-reveal data-magnetic>Falar com a equipe no WhatsApp</a>
         </div>
         <div class="faq" data-stagger>
           <div class="faq__item"><button class="faq__q" aria-expanded="false">Para quem é esse curso?<span class="faq__icon"></span></button><div class="faq__a"><p>Para fonoaudiólogos que atuam (ou querem atuar) com crianças com TEA e Necessidades Complexas de Comunicação e querem implementar a CAA na prática. Serve tanto para quem está começando quanto para quem já conhece a teoria, mas ainda trava na hora de aplicar.</p></div></div>
@@ -592,7 +609,7 @@
         </div>
         <div><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
         <div><h4>Curso</h4><ul><li><a href="#conteudo">Conteúdo</a></li><li><a href="#oferta">Investimento</a></li><li><a href="#" data-checkout>Comprar</a></li></ul></div>
-        <div><h4>Contato</h4><ul><li><a href="#" data-wa="o curso CAA: Para Além de Pictogramas">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+        <div><h4>Contato</h4><ul><li><a href="#" data-wa="o curso CAA: Para Além de Pictogramas" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
       </div>
       <div class="footer__big">Para além <em>de pictogramas.</em></div>
       <div class="footer__bottom">
