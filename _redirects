@@ -1,7 +1,5 @@
-# Cloudflare Pages Redirects / Rewrites
-/servicos-clinicos    /servicos.html      200
-/curso-caa            /curso.html         200
-/servicos             /servicos.html      200
-/curso                /curso.html         200
-/ferramentas          /ferramentas.html   200
-/obrigado             /obrigado.html      200
+# Cloudflare Pages Redirects
+# O Cloudflare Pages já mapeia nativamente /servicos -> servicos.html, /curso -> curso.html, etc.
+# Usamos 301 para aliases adicionais:
+/servicos-clinicos    /servicos    301
+/curso-caa            /curso       301
