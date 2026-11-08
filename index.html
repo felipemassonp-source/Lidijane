@@ -8,11 +8,11 @@
   <meta property="og:title" content="Lidijane Araújo Galvão · Fonoaudiologia & CAA">
   <meta property="og:description" content="Toda criança tem algo a dizer. Avaliação, atendimento e supervisão clínica em CAA.">
   <meta property="og:image" content="assets/img/lidi-retrato.jpg">
-  <link rel="icon" type="image/png" href="assets/img/simbolo-lidijane.png">
-  <link rel="apple-touch-icon" href="assets/img/simbolo-lidijane.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..500,0..100,0..1;1,9..144,300..500,0..100,0..1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/img/simbolo-lidijane-192.png">
+  <link rel="apple-touch-icon" href="assets/img/simbolo-lidijane-192.png">
+  <link rel="preload" href="assets/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},3000)</script>
   <!-- Meta Pixel Code -->
@@ -21,9 +21,10 @@
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
+  n.queue=[];function l(){t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  s.parentNode.insertBefore(t,s)}
+  if(b.readyState==='complete')l();else f.addEventListener('load',function(){setTimeout(l,0)})}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '3195814143953340');
   fbq('track', 'PageView');
@@ -41,7 +42,7 @@
   <!-- NAV -->
   <header class="nav">
     <a href="index.html" class="brand" aria-label="Lidijane Araújo — início">
-      <img class="brand__logo" src="assets/img/logo-lidijane.png" alt="Lidijane Araújo · Fonoaudióloga" width="1421" height="631">
+      <img class="brand__logo" src="assets/img/logo-lidijane.webp" alt="Lidijane Araújo · Fonoaudióloga" width="1421" height="631">
     </a>
     <ul class="nav__links">
       <li><a href="index.html" class="is-active">Início</a></li>
@@ -84,7 +85,7 @@
 
           <div class="hero__visual">
             <div class="hero__photo" data-intro-clip>
-              <img src="assets/img/lidi-retrato.jpg" alt="Lidijane Araújo Galvão, fonoaudióloga" data-parallax>
+              <img src="assets/img/lidi-retrato-900.webp" srcset="assets/img/lidi-retrato-600.webp 600w, assets/img/lidi-retrato-900.webp 900w, assets/img/lidi-retrato-1300.webp 1300w" sizes="(max-width: 860px) 90vw, 45vw" width="1300" height="1950" fetchpriority="high" alt="Lidijane Araújo Galvão, fonoaudióloga" data-parallax>
             </div>
             <div class="hero__badge" data-intro-pop-el>
               <b>+500</b><span>fonoaudiólogas<br>supervisionadas</span>
@@ -134,7 +135,7 @@
     <section class="sec" style="padding-top:0" id="sobre">
       <div class="wrap grid-2">
         <div class="about__img" data-cursor="Lidi">
-          <img src="assets/img/lidi-hero.jpg" alt="Lidijane Araújo Galvão" data-parallax>
+          <img src="assets/img/lidi-hero-900.webp" srcset="assets/img/lidi-hero-600.webp 600w, assets/img/lidi-hero-900.webp 900w, assets/img/lidi-hero-1300.webp 1300w" sizes="(max-width: 860px) 90vw, 45vw" width="1300" height="1950" loading="lazy" decoding="async" alt="Lidijane Araújo Galvão" data-parallax>
           <div class="reveal-cover"></div>
         </div>
         <div>
@@ -252,7 +253,7 @@
           <p class="muted" data-reveal style="margin-top:30px;font-weight:700">Lidijane Araújo Galvão</p>
         </div>
         <div class="about__img" style="aspect-ratio:1/1.05">
-          <img src="assets/img/lidi-apresentacao.jpg" alt="Lidijane usando um comunicador de CAA no tablet" data-parallax style="object-position:center 40%">
+          <img src="assets/img/lidi-apresentacao-900.webp" srcset="assets/img/lidi-apresentacao-600.webp 600w, assets/img/lidi-apresentacao-900.webp 900w, assets/img/lidi-apresentacao-1300.webp 1300w" sizes="(max-width: 860px) 90vw, 45vw" width="1300" height="1950" loading="lazy" decoding="async" alt="Lidijane usando um comunicador de CAA no tablet" data-parallax style="object-position:center 40%">
           <div class="reveal-cover" style="background:var(--coral)"></div>
         </div>
       </div>
@@ -277,26 +278,27 @@
     <div class="wrap">
       <div class="footer__top">
         <div>
-          <a href="index.html" class="brand"><img class="brand__logo" src="assets/img/logo-lidijane-branco.png" alt="Lidijane Araújo · Fonoaudióloga" width="1421" height="631"></a>
+          <a href="index.html" class="brand"><img class="brand__logo" src="assets/img/logo-lidijane-branco.webp" loading="lazy" decoding="async" alt="Lidijane Araújo · Fonoaudióloga" width="1421" height="631"></a>
           <p style="margin-top:22px;max-width:34ch">Fonoaudióloga especialista em Comunicação Aumentativa e Alternativa para crianças com Necessidades Complexas de Comunicação, sobretudo no TEA.</p>
         </div>
-        <div><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
-        <div><h4>Serviços clínicos</h4><ul><li><a href="servicos.html#avaliacao">Avaliação em CAA</a></li><li><a href="servicos.html#atendimento">Terapia fonoaudiológica</a></li><li><a href="servicos.html#supervisao">Supervisão clínica</a></li><li><a href="servicos.html#treinamentos">Treinamento de equipes</a></li></ul></div>
-        <div><h4>Contato</h4><ul><li><a href="#" data-wa="seus atendimentos" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+        <div><h3 class="footer__h">Navegação</h3><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
+        <div><h3 class="footer__h">Serviços clínicos</h3><ul><li><a href="servicos.html#avaliacao">Avaliação em CAA</a></li><li><a href="servicos.html#atendimento">Terapia fonoaudiológica</a></li><li><a href="servicos.html#supervisao">Supervisão clínica</a></li><li><a href="servicos.html#treinamentos">Treinamento de equipes</a></li></ul></div>
+        <div><h3 class="footer__h">Contato</h3><ul><li><a href="#" data-wa="seus atendimentos" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
       </div>
       <div class="footer__big">Para além <em>de pictogramas.</em></div>
       <div class="footer__bottom">
         <span>© <span data-year>2026</span> Lidijane Araújo Galvão · Fonoaudióloga · CRFa 3-20972</span>
-        <span>Desenvolvido por Apogeu Digital</span>
+        <span><a href="privacidade.html">Política de privacidade</a> · Desenvolvido por Apogeu Digital</span>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script>
+  /* bibliotecas executam logo após a 1ª pintura (a cortina de entrada cobre a página até lá) */
+  (function(){var s=["assets/js/vendor/gsap.min.js","assets/js/vendor/ScrollTrigger.min.js","assets/js/vendor/SplitText.min.js","assets/js/vendor/Flip.min.js","assets/js/vendor/lenis.min.js","assets/js/main.js"];
+  function go(){s.forEach(function(src){var e=document.createElement('script');e.src=src;e.async=false;document.body.appendChild(e)})}
+  var d;function once(){if(!d){d=1;go()}}
+  requestAnimationFrame(function(){setTimeout(once,0)});setTimeout(once,100)})();
+  </script>
 </body>
 </html>

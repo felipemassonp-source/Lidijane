@@ -1,3 +1,130 @@
+/* Fontes auto-hospedadas (Fraunces + Manrope, subsets latin e latin-ext) */
+/* latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url(../fonts/fraunces-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url(../fonts/fraunces-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url(../fonts/fraunces-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url(../fonts/fraunces-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(../fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 /* =========================================================
    Lidijane Araújo Galvão — Fonoaudiologia & CAA
    Design system
@@ -329,7 +456,9 @@ p { margin: 0 0 1em; }
 .footer { background: var(--ink); color: rgba(245,242,234,.7); padding: 90px 0 36px; overflow: hidden; }
 .footer a:hover { color: var(--paper); }
 .footer__top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 70px; }
-.footer h4 { color: var(--paper); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 18px; }
+.footer h4, .footer .footer__h { color: var(--paper); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 18px; }
+/* h3 do rodapé com a mesma aparência do antigo h4 */
+.footer .footer__h { font-family: inherit; font-weight: bold; line-height: inherit; font-variation-settings: normal; }
 .footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .footer .brand__name { color: var(--paper); }
 .footer__big { font-family: var(--serif); font-size: clamp(60px, 15vw, 240px); line-height: .85; color: var(--paper); letter-spacing: -.04em; white-space: nowrap; }
@@ -693,6 +822,25 @@ p { margin: 0 0 1em; }
 .radios input { position: absolute; opacity: 0; pointer-events: none; }
 .radios span { display: inline-block; padding: 10px 18px; border-radius: 100px; border: 1.5px solid var(--line); font-weight: 700; font-size: 14px; transition: all .3s; }
 .radios input:checked + span { background: var(--green); color: var(--white); border-color: var(--green); }
+.field-label { font-size: 13px; font-weight: 700; color: var(--ink-soft); padding-left: 6px; margin-bottom: -4px; }
+.field--select { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 50px; color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2A24' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 20px center; background-size: 18px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.5; color: var(--ink-soft); cursor: pointer; margin-top: 4px; }
+.consent input { width: 18px; height: 18px; margin: 1px 0 0; flex: none; accent-color: var(--green); }
+.form-msg { margin: 0; min-height: 0; font-size: 14px; font-weight: 700; color: #9C3227; }
+.form-msg:empty { display: none; }
+.legal { max-width: 72ch; }
+.legal__date { font-size: 13px; color: var(--ink-faint); }
+.legal h2 { font-size: clamp(24px, 2.4vw, 32px); margin: 44px 0 14px; }
+.legal p, .legal li { color: var(--ink-soft); }
+.legal ul { padding-left: 20px; margin: 0 0 16px; }
+.legal li { margin-bottom: 6px; }
+.form-done { text-align: center; padding: 12px 0; }
+.form-done__actions { display: grid; gap: 16px; justify-items: center; }
 
 /* ---------- Utilidades de animação ---------- */
 [data-reveal] { will-change: transform, opacity; }
@@ -886,6 +1034,29 @@ html.lenis, html.lenis body { height: auto; }
 .tool__price { font-family: var(--serif); font-size: 22px; }
 .tool .app__logo { width: 64px; height: 64px; margin: 0; }
 .aff-note { font-size: 13px; color: var(--ink-faint); margin-top: 30px; max-width: 80ch; }
+
+/* ferramentas: curadoria (transparência, livros, aparelhos, lojas) */
+.disclose__n { display: block; font-family: var(--serif); font-size: 15px; color: var(--coral); margin-bottom: 12px; }
+.tool.pick { min-height: 0; }
+.tool.pick:hover { transform: none; translate: 0; box-shadow: none; }
+.pick__by { font-size: 13.5px !important; color: var(--ink-faint) !important; margin: -4px 0 16px !important; }
+.pick__why { background: var(--paper); border-radius: 12px; padding: 14px 16px; font-size: 14.5px !important; margin-bottom: 18px !important; }
+.pick__why b { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+.stores { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+.store { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border-radius: 100px; border: 1px solid var(--line); font-size: 13px; font-weight: 700; transition: background .3s, color .3s, border-color .3s; }
+.store::after { content: "↗"; font-weight: 400; }
+.store:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.stores__soon { font-size: 13px; font-weight: 700; color: var(--ink-faint); padding: 9px 0; }
+.book { --c: var(--green); width: 40%; aspect-ratio: 2/3; background: var(--c); color: var(--white); border-radius: 4px 10px 10px 4px; padding: 12px 9px 10px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 7px 0 0 rgba(0,0,0,.16), 0 18px 30px -16px rgba(19,63,53,.55); transform: rotate(-3deg); transition: transform .6s var(--ease); }
+.tool:hover .book { transform: rotate(0) translateY(-4px); }
+.book { container-type: inline-size; }
+.book__t { font-family: var(--serif); font-size: 13cqi; line-height: 1.15; }
+.book__a { font-size: 5.6cqi; font-weight: 700; letter-spacing: .04em; line-height: 1.35; text-transform: uppercase; opacity: .82; }
+.device { width: 80%; background: var(--ink); border-radius: 16px; padding: 9px; box-shadow: 0 18px 30px -16px rgba(19,63,53,.55); }
+.device .board { width: 100%; background: var(--white); border-radius: 9px; padding: 7px; }
+.device--case { background: var(--coral); padding: 15px; border-radius: 24px; width: 70%; }
+.device--glass { position: relative; overflow: hidden; }
+.device--glass::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.45) 50%, transparent 60%); }
 
 @media (max-width: 1100px) {
   .fronts, .svc-index, .legend { grid-template-columns: 1fr 1fr; }

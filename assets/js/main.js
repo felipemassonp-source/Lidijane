@@ -14,6 +14,16 @@ const CONFIG = {
     instCount: "12x",          // nº de parcelas
     instValue: "35,16",        // valor da parcela (sem R$)
   },
+  // Captura de leads (materiais gratuitos). URL do "App da Web" do Google Apps Script.
+  // Passo a passo em integracoes/captura-de-leads/COMO-INSTALAR.md
+  leadEndpoint: "",
+  // Materiais gratuitos. Quando o PDF ficar pronto: coloque o arquivo em site/materiais/
+  // e mude "pronto" para true (aqui E no Code.gs do Google).
+  materiais: {
+    "checklist-implementacao": { titulo: "Checklist de implementação da CAA", arquivo: "materiais/checklist-implementacao.pdf", pronto: false },
+    "prancha-vocabulario":     { titulo: "Prancha de vocabulário essencial para imprimir", arquivo: "materiais/prancha-vocabulario-essencial.pdf", pronto: false },
+    "ebook-erros-adesao":      { titulo: "E-book: Erros que travam a adesão da CAA", arquivo: "materiais/ebook-erros-adesao-caa.pdf", pronto: false },
+  },
 };
 
 (() => {
@@ -168,6 +178,20 @@ const CONFIG = {
       .join("");
   });
 
+  /* ---------- Lojas de afiliado (página de ferramentas) ---------- */
+  // botão sem href = link ainda não cadastrado: esconde. Sem nenhum link: "Link em breve".
+  $$(".stores").forEach((box) => {
+    $$(".store", box).forEach((a) => {
+      if (!a.getAttribute("href")) return a.remove();
+      a.addEventListener("click", () => {
+        if (typeof fbq === "function") fbq("trackCustom", "CliqueAfiliado", {
+          loja: a.dataset.store, item: a.closest(".tool")?.querySelector("h3")?.textContent || "",
+        });
+      });
+    });
+    if (!$(".store", box)) box.innerHTML = '<span class="stores__soon">Link em breve</span>';
+  });
+
   /* ---------- Rolagem suave ---------- */
   let lenis = null;
   if (!reduce && window.Lenis) {
@@ -286,7 +310,9 @@ const CONFIG = {
     intro();
     scrollAnimations();
     pageSpecific();
-    window.addEventListener("load", () => ScrollTrigger.refresh());
+    // os scripts carregam depois da 1ª pintura; o "load" pode já ter acontecido
+    if (document.readyState === "complete") ScrollTrigger.refresh();
+    else window.addEventListener("load", () => ScrollTrigger.refresh());
   });
 
   function intro() {
@@ -327,6 +353,8 @@ const CONFIG = {
     $$("[data-split]").forEach((h) => {
       SplitText.create(h, {
         type: "lines", mask: "lines", linesClass: "split-line", autoSplit: true,
+        // <p> não aceita aria-label: deixa o texto dividido legível para leitores de tela
+        aria: h.tagName === "P" ? "none" : "auto",
         onSplit: (self) => gsap.from(self.lines, {
           yPercent: 110, duration: 1.1, ease: "power4.out", stagger: 0.08,
           scrollTrigger: { trigger: h, start: "top 86%", once: true },
@@ -336,7 +364,7 @@ const CONFIG = {
 
     // texto que acende palavra por palavra
     $$(".manifesto").forEach((m) => {
-      const st = SplitText.create(m, { type: "words", wordsClass: "word" });
+      const st = SplitText.create(m, { type: "words", wordsClass: "word", aria: m.tagName === "P" ? "none" : "auto" });
       gsap.to(st.words, {
         opacity: 1, stagger: 0.1, ease: "none",
         scrollTrigger: { trigger: m, start: "top 78%", end: "bottom 50%", scrub: true },
@@ -509,40 +537,95 @@ const CONFIG = {
   }
 
   /* ---------- Formulário de captura ---------- */
+  // Card "Baixar grátis" já escolhe o material no formulário
+  $$("[data-material]").forEach((a) => a.addEventListener("click", () => {
+    const sel = $("#lead-material");
+    if (sel) sel.value = a.dataset.material;
+  }));
+
+  // Máscara simples de WhatsApp: (11) 99999-9999
+  $$('form[data-capture] input[name="whatsapp"]').forEach((i) => i.addEventListener("input", () => {
+    const d = i.value.replace(/\D/g, "").slice(0, 11);
+    i.value = d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`
+      : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+  }));
+
+  const perfilLabels = { fono: "Fonoaudióloga", familia: "Mãe / pai", professor: "Professor(a)", outro: "Outro profissional" };
+  const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
   $$("form[data-capture]").forEach((f) =>
-    f.addEventListener("submit", (e) => {
+    f.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (typeof fbq === "function") {
-        fbq("track", "Lead", { content_name: "Materiais Gratuitos CAA" });
-      }
-      const nome = ($('input[name="nome"]', f)?.value || "").trim();
-      const email = ($('input[name="email"]', f)?.value || "").trim();
-      const perfilInput = $('input[name="perfil"]:checked', f);
-      const perfilLabels = {
-        fono: "Fonoaudióloga",
-        familia: "Mãe / Pai",
-        professor: "Professor(a)",
-        outro: "Outro profissional",
+      const msgEl = $(".form-msg", f), btn = $('button[type="submit"]', f);
+      const val = (n) => ($(`[name="${n}"]`, f)?.value || "").trim();
+      const fail = (txt, el) => { msgEl.textContent = txt; el?.focus(); };
+
+      // validação
+      const nome = val("nome"), email = val("email"), whatsapp = val("whatsapp");
+      if (!nome) return fail("Escreva o seu nome.", $('[name="nome"]', f));
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Confira o seu e-mail.", $('[name="email"]', f));
+      if (whatsapp.replace(/\D/g, "").length < 10) return fail("Informe o WhatsApp com DDD.", $('[name="whatsapp"]', f));
+      if (!$('[name="consentimento"]', f).checked) return fail("Para continuar, marque que concorda em receber o material.", $('[name="consentimento"]', f));
+      msgEl.textContent = "";
+
+      const id = val("material") || Object.keys(CONFIG.materiais)[0];
+      const mat = CONFIG.materiais[id];
+      const perfil = perfilLabels[$('input[name="perfil"]:checked', f)?.value] || "";
+      const payload = {
+        material: id, nome, email, whatsapp, cidade: val("cidade"), perfil,
+        consentimento: true, website: val("website"), pagina: location.pathname,
       };
-      const perfil = perfilLabels[perfilInput?.value] || "Interessado(a) em CAA";
-      const msg = `Olá, Lidijane! Meu nome é ${nome || "Visitante"} (${perfil}) e me cadastrei no site para receber os materiais de CAA.`;
-      const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach((k) => { payload[k] = passParams.get(k) || ""; });
+
+      btn.disabled = true;
+      const btnHtml = btn.innerHTML;
+      btn.textContent = "Enviando...";
+
+      // envia para a planilha (Google Apps Script). Mesmo se falhar, a pessoa recebe o material.
+      let salvo = false;
+      if (CONFIG.leadEndpoint) {
+        try {
+          const ctrl = new AbortController();
+          const t = setTimeout(() => ctrl.abort(), 12000);
+          const r = await fetch(CONFIG.leadEndpoint, { method: "POST", body: JSON.stringify(payload), signal: ctrl.signal });
+          clearTimeout(t);
+          salvo = !!(await r.json()).ok;
+        } catch (_) { salvo = false; }
+      } else {
+        console.warn("[captura] CONFIG.leadEndpoint vazio: o cadastro não foi gravado.");
+      }
+
+      if (typeof fbq === "function") fbq("track", "Lead", { content_name: mat.titulo });
+
+      // download
+      if (mat.pronto) {
+        const a = document.createElement("a");
+        a.href = mat.arquivo; a.download = ""; document.body.appendChild(a); a.click(); a.remove();
+      }
+
+      const waMsg = `Olá, Lidijane! Meu nome é ${nome} (${perfil || "visitante"}) e baixei o material "${mat.titulo}" no site.`;
+      const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(waMsg)}`;
+      const titulo = mat.pronto ? "Seu material está baixando." : salvo ? "Cadastro feito!" : "Quase lá!";
+      const texto = mat.pronto
+        ? (salvo ? "Também enviei o link para o seu e-mail, para você guardar." : "Se o download não começar, use o botão abaixo.")
+        : salvo ? "Este material está na reta final de produção. Assim que ficar pronto, ele chega no seu e-mail."
+        : "Não consegui registrar o seu cadastro agora. Me chame no WhatsApp pelo link abaixo que eu envio o material para você.";
+      const baixar = mat.pronto
+        ? `<a href="${mat.arquivo}" download class="btn btn--coral" style="display:inline-flex;justify-content:center">Baixar novamente</a>` : "";
+
       gsap.to(f, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
         f.innerHTML = `
-          <div style="text-align:center;padding:12px 0">
-            <p class="display" style="font-size:30px;line-height:1.2;margin-bottom:12px">Prontinho! 💚</p>
-            <p class="muted" style="font-family:var(--sans);font-size:16px;margin-bottom:20px">Redirecionando para o WhatsApp da Lidijane...</p>
-            <a href="${waUrl}" class="btn btn--coral btn-whatsapp" id="btn-whatsapp" style="display:inline-flex;justify-content:center">
-              Abrir WhatsApp agora
-              <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-        `;
+          <div class="form-done">
+            <p class="display" style="font-size:30px;line-height:1.2;margin-bottom:12px">${titulo}</p>
+            <p class="muted" style="font-size:16px;margin-bottom:22px"><b>${esc(mat.titulo)}</b><br>${texto}</p>
+            <div class="form-done__actions">
+              ${baixar}
+              <a href="${waUrl}" target="_blank" rel="noopener" class="${salvo ? "link-u" : "btn btn--coral"}">${salvo ? "Tirar uma dúvida com a Lidijane no WhatsApp" : "Chamar a Lidijane no WhatsApp"}</a>
+            </div>
+          </div>`;
         gsap.to(f, { opacity: 1, y: 0, duration: 0.5 });
-        setTimeout(() => {
-          window.location.href = waUrl;
-        }, 1200);
       } });
+      btn.innerHTML = btnHtml;
     })
   );
 })();

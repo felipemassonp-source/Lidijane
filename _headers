@@ -1,0 +1,14 @@
+# Cloudflare Pages — cabeçalhos de cache
+# Fontes e bibliotecas têm versão fixa e não mudam: cache de 1 ano.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/js/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imagens: 7 dias. Se trocar uma foto mantendo o mesmo nome, use um nome novo
+# (ex.: lidi-retrato-v2-900.webp) para todos verem a nova na hora.
+/assets/img/*
+  Cache-Control: public, max-age=604800
+
+# HTML, style.css e main.js ficam no padrão do Cloudflare (sempre revalida),
+# para que ajustes no site apareçam imediatamente.
