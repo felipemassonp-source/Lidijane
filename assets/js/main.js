@@ -14,15 +14,15 @@ const CONFIG = {
     instCount: "12x",          // nº de parcelas
     instValue: "35,16",        // valor da parcela (sem R$)
   },
-  // Captura de leads (materiais gratuitos). URL do "App da Web" do Google Apps Script.
-  // Passo a passo em integracoes/captura-de-leads/COMO-INSTALAR.md
-  leadEndpoint: "",
-  // Materiais gratuitos. Quando o PDF ficar pronto: coloque o arquivo em site/materiais/
-  // e mude "pronto" para true (aqui E no Code.gs do Google).
+  // Captura de leads: os cadastros vão para o banco de dados (Firebase) e aparecem
+  // no painel em /admin. Conexão em assets/js/firebase-config.js.
+  // Materiais gratuitos: cole em "link" o link de download (ex.: Google Drive com
+  // "qualquer pessoa com o link"). O botão de baixar aparece logo depois do cadastro.
+  // Sem link, a pessoa vê "cadastro feito" e a Lidijane envia pelo WhatsApp.
   materiais: {
-    "checklist-implementacao": { titulo: "Checklist de implementação da CAA", arquivo: "materiais/checklist-implementacao.pdf", pronto: false },
-    "prancha-vocabulario":     { titulo: "Prancha de vocabulário essencial para imprimir", arquivo: "materiais/prancha-vocabulario-essencial.pdf", pronto: false },
-    "ebook-erros-adesao":      { titulo: "E-book: Erros que travam a adesão da CAA", arquivo: "materiais/ebook-erros-adesao-caa.pdf", pronto: false },
+    "checklist-implementacao": { titulo: "Checklist de implementação da CAA", link: "" },
+    "prancha-vocabulario":     { titulo: "Prancha de vocabulário essencial para imprimir", link: "" },
+    "ebook-erros-adesao":      { titulo: "E-book: Erros que travam a adesão da CAA", link: "" },
   },
 };
 
@@ -213,20 +213,46 @@ const CONFIG = {
 
   /* ---------- Transição entre páginas ---------- */
   const trSpans = $$(".transition span");
+  // entrada ~0,6s / saída ~0,45s (antes ~1s e ~0,8s)
   const revealPage = () =>
-    gsap.to(trSpans, { scaleY: 0, transformOrigin: "top", duration: 0.8, ease: "power4.inOut", stagger: 0.06 });
+    gsap.to(trSpans, { scaleY: 0, transformOrigin: "top", duration: 0.5, ease: "power3.inOut", stagger: 0.025 });
+  let leaving = false;
   const leavePage = (url) => {
+    if (leaving) return;
+    leaving = true;
+    prefetch(url);
     gsap.set(trSpans, { transformOrigin: "bottom" });
     gsap.to(trSpans, {
-      scaleY: 1, duration: 0.6, ease: "power4.inOut", stagger: 0.05,
+      scaleY: 1, duration: 0.36, ease: "power3.in", stagger: 0.02,
       onComplete: () => (location.href = url),
     });
   };
+  // pré-carrega a próxima página quando o dedo/mouse chega no link: ao fim da cortina ela já está pronta
+  const prefetched = new Set();
+  const prefetch = (url) => {
+    const u = url.split("#")[0];
+    if (prefetched.has(u)) return;
+    prefetched.add(u);
+    const l = document.createElement("link");
+    l.rel = "prefetch"; l.href = u;
+    document.head.appendChild(l);
+  };
+  const internalUrl = (a) => {
+    const href = a && a.getAttribute("href");
+    if (!href || a.target === "_blank" || /^(#|mailto:|tel:|javascript:)/.test(href)) return null;
+    const url = new URL(a.href, location.href);
+    return url.origin === location.origin && url.pathname !== location.pathname ? url.href : null;
+  };
+  const onIntent = (e) => { const u = internalUrl(e.target.closest && e.target.closest("a")); if (u) prefetch(u); };
+  document.addEventListener("pointerover", onIntent, { passive: true });
+  document.addEventListener("touchstart", onIntent, { passive: true });
+  document.addEventListener("focusin", onIntent);
+  window.addEventListener("pageshow", (e) => { if (e.persisted) leaving = false; });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a || e.defaultPrevented) return;
     const href = a.getAttribute("href");
-    if (!href || a.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (!href || a.target === "_blank" || a.hasAttribute("download") || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
     if (/^(#|mailto:|tel:|javascript:)/.test(href)) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin) return;
@@ -302,21 +328,24 @@ const CONFIG = {
   }
 
   /* ---------- Animações (após fontes) ---------- */
-  const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 1500))]);
+  // fontes têm preload e font-display: swap — não segura a cortina mais que 400ms por elas
+  const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 400))]);
 
   fontsReady.then(() => {
-    revealPage();
-    if (reduce) return;
-    intro();
+    if (reduce) return revealPage();
+    // o trabalho pesado (SplitText, ScrollTriggers) roda ainda com a cortina fechada;
+    // a cortina só abre no quadro seguinte, para a animação não engasgar
     scrollAnimations();
     pageSpecific();
+    const tl = intro();
+    requestAnimationFrame(() => { revealPage(); tl.play(); });
     // os scripts carregam depois da 1ª pintura; o "load" pode já ter acontecido
     if (document.readyState === "complete") ScrollTrigger.refresh();
     else window.addEventListener("load", () => ScrollTrigger.refresh());
   });
 
   function intro() {
-    const tl = gsap.timeline({ delay: 0.35 });
+    const tl = gsap.timeline({ paused: true, delay: 0.15 });
     $$("[data-intro-split]").forEach((h) => {
       const st = SplitText.create(h, { type: "lines", mask: "lines", linesClass: "split-line", ignore: "svg" });
       tl.from(st.lines, { yPercent: 110, duration: 1.15, ease: "power4.out", stagger: 0.09 }, 0);
@@ -346,6 +375,7 @@ const CONFIG = {
       gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
       tl.to(p, { strokeDashoffset: 0, duration: 1.1, ease: "power3.inOut" }, 1.1);
     });
+    return tl;
   }
 
   function scrollAnimations() {
@@ -572,8 +602,8 @@ const CONFIG = {
       const mat = CONFIG.materiais[id];
       const perfil = perfilLabels[$('input[name="perfil"]:checked', f)?.value] || "";
       const payload = {
-        material: id, nome, email, whatsapp, cidade: val("cidade"), perfil,
-        consentimento: true, website: val("website"), pagina: location.pathname,
+        material: id, materialTitulo: mat.titulo, nome, email, whatsapp, cidade: val("cidade"), perfil,
+        pagina: location.pathname,
       };
       ["utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach((k) => { payload[k] = passParams.get(k) || ""; });
 
@@ -581,37 +611,31 @@ const CONFIG = {
       const btnHtml = btn.innerHTML;
       btn.textContent = "Enviando...";
 
-      // envia para a planilha (Google Apps Script). Mesmo se falhar, a pessoa recebe o material.
+      // grava no banco de dados (Firebase). O SDK só é baixado neste momento, não pesa no site.
       let salvo = false;
-      if (CONFIG.leadEndpoint) {
+      if (val("website")) salvo = true; // campo-armadilha preenchido = robô: finge sucesso e não grava
+      else {
         try {
-          const ctrl = new AbortController();
-          const t = setTimeout(() => ctrl.abort(), 12000);
-          const r = await fetch(CONFIG.leadEndpoint, { method: "POST", body: JSON.stringify(payload), signal: ctrl.signal });
-          clearTimeout(t);
-          salvo = !!(await r.json()).ok;
-        } catch (_) { salvo = false; }
-      } else {
-        console.warn("[captura] CONFIG.leadEndpoint vazio: o cadastro não foi gravado.");
+          const store = await import(new URL("assets/js/leads-store.js", document.baseURI).href);
+          const r = await store.saveLead(payload);
+          salvo = r.ok;
+          if (!r.ok) console.warn("[captura] Firebase ainda não configurado: o cadastro não foi gravado.");
+        } catch (err) { console.error("[captura]", err); salvo = false; }
       }
+      const link = salvo && /^https:\/\//.test(mat.link || "") ? mat.link : "";
 
-      if (typeof fbq === "function") fbq("track", "Lead", { content_name: mat.titulo });
-
-      // download
-      if (mat.pronto) {
-        const a = document.createElement("a");
-        a.href = mat.arquivo; a.download = ""; document.body.appendChild(a); a.click(); a.remove();
-      }
+      // Pixel: só conta como lead quando o cadastro foi gravado de verdade
+      if (salvo && typeof fbq === "function") fbq("track", "Lead", { content_name: mat.titulo });
 
       const waMsg = `Olá, Lidijane! Meu nome é ${nome} (${perfil || "visitante"}) e baixei o material "${mat.titulo}" no site.`;
       const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(waMsg)}`;
-      const titulo = mat.pronto ? "Seu material está baixando." : salvo ? "Cadastro feito!" : "Quase lá!";
-      const texto = mat.pronto
-        ? (salvo ? "Também enviei o link para o seu e-mail, para você guardar." : "Se o download não começar, use o botão abaixo.")
-        : salvo ? "Este material está na reta final de produção. Assim que ficar pronto, ele chega no seu e-mail."
+      const titulo = link ? "Seu material está pronto!" : salvo ? "Cadastro feito!" : "Quase lá!";
+      const texto = link
+        ? "Clique no botão abaixo para baixar e salve o arquivo no seu celular ou computador."
+        : salvo ? "Este material está na reta final de produção. Assim que ficar pronto, eu te envio pelo WhatsApp."
         : "Não consegui registrar o seu cadastro agora. Me chame no WhatsApp pelo link abaixo que eu envio o material para você.";
-      const baixar = mat.pronto
-        ? `<a href="${mat.arquivo}" download class="btn btn--coral" style="display:inline-flex;justify-content:center">Baixar novamente</a>` : "";
+      const baixar = link
+        ? `<a href="${esc(link)}" target="_blank" rel="noopener" class="btn btn--coral" style="display:inline-flex;justify-content:center">Baixar material</a>` : "";
 
       gsap.to(f, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
         f.innerHTML = `

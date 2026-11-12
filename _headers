@@ -12,3 +12,11 @@
 
 # HTML, style.css e main.js ficam no padrão do Cloudflare (sempre revalida),
 # para que ajustes no site apareçam imediatamente.
+
+# Área restrita: fora do Google e sem cache
+/admin
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+/admin.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

@@ -10,6 +10,12 @@
   <link rel="preload" href="assets/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/fraunces-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/js/vendor/gsap.min.js" as="script">
+  <link rel="preload" href="assets/js/vendor/ScrollTrigger.min.js" as="script">
+  <link rel="preload" href="assets/js/vendor/SplitText.min.js" as="script">
+  <link rel="preload" href="assets/js/vendor/Flip.min.js" as="script">
+  <link rel="preload" href="assets/js/vendor/lenis.min.js" as="script">
+  <link rel="preload" href="assets/js/main.js" as="script">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.gsap)document.documentElement.classList.remove('js')},3000)</script>
   <!-- Meta Pixel Code -->
@@ -367,8 +373,8 @@
         <div class="capture" data-reveal>
           <div>
             <span class="kicker">Materiais gratuitos</span>
-            <h2 style="margin:22px 0 20px;font-size:clamp(36px,4.4vw,64px)">Baixe agora e receba também no seu <em>e-mail.</em></h2>
-            <p class="muted">Escolha o material, conte quem você é e o download começa na hora. Uma cópia do link chega no seu e-mail para você guardar.</p>
+            <h2 style="margin:22px 0 20px;font-size:clamp(36px,4.4vw,64px)">Baixe agora, <em>de graça.</em></h2>
+            <p class="muted">Escolha o material, conte quem você é e o botão de download aparece na hora.</p>
           </div>
           <form data-capture id="form-lead" novalidate>
             <label class="field-label" for="lead-material">Qual material você quer?</label>
@@ -414,7 +420,7 @@
       <div class="footer__big">Para além <em>de pictogramas.</em></div>
       <div class="footer__bottom">
         <span>© <span data-year>2026</span> Lidijane Araújo Galvão · Fonoaudióloga · CRFa 3-20972</span>
-        <span><a href="privacidade.html">Política de privacidade</a> · Desenvolvido por Apogeu Digital</span>
+        <span><a href="privacidade.html">Política de privacidade</a> · Desenvolvido por Apogeu Digital · <a href="admin.html" rel="nofollow">Acesso restrito</a></span>
       </div>
     </div>
   </footer>
