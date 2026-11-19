@@ -54,7 +54,7 @@
       <li><a href="index.html" class="is-active">Início</a></li>
       <li><a href="servicos.html">Serviços Clínicos</a></li>
       <li><a href="curso.html">Curso de CAA</a></li>
-      <li><a href="ferramentas.html">Ferramentas</a></li>
+      <!-- OCULTO-TEMP-FERRAMENTAS: <li><a href="ferramentas.html">Ferramentas</a></li> -->
     </ul>
     <a href="#" data-wa="um agendamento clínico" class="btn nav__cta btn-whatsapp" id="btn-whatsapp-nav" data-magnetic>Agendar conversa</a>
     <button class="nav__burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
@@ -64,7 +64,7 @@
       <li><a class="big" href="index.html">Início</a></li>
       <li><a class="big" href="servicos.html">Serviços <em>clínicos</em></a></li>
       <li><a class="big" href="curso.html">Curso <em>de CAA</em></a></li>
-      <li><a class="big" href="ferramentas.html">Ferramentas</a></li>
+      <!-- OCULTO-TEMP-FERRAMENTAS: <li><a class="big" href="ferramentas.html">Ferramentas</a></li> -->
     </ul>
     <div class="mobile-menu__foot">
       <a href="#" data-wa="um agendamento clínico" class="btn btn--coral btn-whatsapp">Falar no WhatsApp</a>
@@ -221,7 +221,7 @@
     <!-- PORTAS: CURSO + FERRAMENTAS -->
     <section class="sec" style="padding-top:0">
       <div class="wrap">
-        <div class="doors" data-stagger>
+        <div class="doors" data-stagger style="grid-template-columns:1fr"><!-- OCULTO-TEMP-FERRAMENTAS: remover o style ao reativar -->
           <a href="curso.html" class="door door--course" data-cursor="Abrir">
             <span class="door__tag">Curso online · Acesso imediato</span>
             <div class="door__art" data-board="eu:,quero:,mais:,ir:,olhar:,falar:,sim:,não:,ajuda:,brincar:,ler:,feliz:"></div>
@@ -234,6 +234,7 @@
               <span class="door__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </a>
+          <!-- OCULTO-TEMP-FERRAMENTAS (inicio)
           <a href="ferramentas.html" class="door door--tools" data-cursor="Abrir">
             <span class="door__tag">Biblioteca prática · Gratuitos e Recomendados</span>
             <div class="door__art" data-board="casa:,escola:,comer:,beber:,dormir:,brincar:,gostar:,parar:,você:,eu:,mais:,sim:"></div>
@@ -246,6 +247,7 @@
               <span class="door__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </div>
           </a>
+          OCULTO-TEMP-FERRAMENTAS (fim) -->
         </div>
       </div>
     </section>
@@ -287,7 +289,7 @@
           <a href="index.html" class="brand"><img class="brand__logo" src="assets/img/logo-lidijane-branco.webp" loading="lazy" decoding="async" alt="Lidijane Araújo · Fonoaudióloga" width="1421" height="631"></a>
           <p style="margin-top:22px;max-width:34ch">Fonoaudióloga especialista em Comunicação Aumentativa e Alternativa para crianças com Necessidades Complexas de Comunicação, sobretudo no TEA.</p>
         </div>
-        <div><h3 class="footer__h">Navegação</h3><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><li><a href="ferramentas.html">Ferramentas</a></li></ul></div>
+        <div><h3 class="footer__h">Navegação</h3><ul><li><a href="index.html">Início</a></li><li><a href="servicos.html">Serviços clínicos</a></li><li><a href="curso.html">Curso de CAA</a></li><!-- OCULTO-TEMP-FERRAMENTAS: <li><a href="ferramentas.html">Ferramentas</a></li> --></ul></div>
         <div><h3 class="footer__h">Serviços clínicos</h3><ul><li><a href="servicos.html#avaliacao">Avaliação em CAA</a></li><li><a href="servicos.html#atendimento">Terapia fonoaudiológica</a></li><li><a href="servicos.html#supervisao">Supervisão clínica</a></li><li><a href="servicos.html#treinamentos">Treinamento de equipes</a></li></ul></div>
         <div><h3 class="footer__h">Contato</h3><ul><li><a href="#" data-wa="seus atendimentos" class="btn-whatsapp">WhatsApp</a></li><li><a href="https://instagram.com/lidijanearaujofono" target="_blank" rel="noopener">Instagram</a></li></ul></div>
       </div>

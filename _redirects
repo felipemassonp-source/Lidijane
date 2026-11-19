@@ -3,3 +3,8 @@
 # Usamos 301 para aliases adicionais:
 /servicos-clinicos    /servicos    301
 /curso-caa            /curso       301
+
+# OCULTO-TEMP-FERRAMENTAS: página de ferramentas oculta até os links de afiliada ficarem prontos.
+# Para reativar, apague estas 2 linhas (302 = temporário, o Google não esquece a página).
+/ferramentas       /    302
+/ferramentas.html  /    302

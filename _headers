@@ -20,3 +20,9 @@
 /admin.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
+
+# OCULTO-TEMP-FERRAMENTAS: fora do Google enquanto estiver oculta (apagar ao reativar)
+/ferramentas
+  X-Robots-Tag: noindex
+/ferramentas.html
+  X-Robots-Tag: noindex
