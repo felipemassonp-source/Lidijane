@@ -39,7 +39,7 @@ const CONFIG = {
   const passParams = new URLSearchParams(location.search);
   $$("[data-checkout]").forEach((a) => {
     const u = new URL(CONFIG.checkout);
-    passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid)/.test(k)) u.searchParams.set(k, v); });
+    passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid|gclid|gbraid|wbraid)/.test(k)) u.searchParams.set(k, v); });
     a.href = u.toString();
     a.addEventListener("click", () => {
       if (typeof fbq === "function") {
@@ -47,6 +47,13 @@ const CONFIG = {
           content_name: "Curso CAA: Para Além de Pictogramas",
           currency: "BRL",
           value: 339.90,
+        });
+      }
+      if (typeof gtag === "function") {
+        gtag("event", "begin_checkout", {
+          currency: "BRL",
+          value: 339.90,
+          items: [{ item_name: "Curso CAA: Para Além de Pictogramas" }],
         });
       }
     });
@@ -60,6 +67,12 @@ const CONFIG = {
       if (typeof fbq === "function") {
         fbq("track", "Contact", { content_name: topic });
         fbq("track", "Lead", { content_name: "WhatsApp: " + topic });
+      }
+      if (typeof gtag === "function") {
+        gtag("event", "generate_lead", {
+          event_category: "WhatsApp",
+          event_label: topic,
+        });
       }
     });
   });
@@ -99,7 +112,7 @@ const CONFIG = {
         const unlockedUrl = new TextDecoder().decode(dec);
         if (!unlockedUrl.startsWith("https://")) return false;
         const u = new URL(unlockedUrl);
-        passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid)/.test(k)) u.searchParams.set(k, v); });
+        passParams.forEach((v, k) => { if (/^(utm_|src|sck|fbclid|gclid|gbraid|wbraid)/.test(k)) u.searchParams.set(k, v); });
         ctaBtn.href = u.toString();
         return true;
       } catch (_) {
