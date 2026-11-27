@@ -1083,3 +1083,11 @@ html.lenis, html.lenis body { height: auto; }
 .footer .brand__logo { height: 72px; }
 @media (max-width: 600px) { .brand__logo { height: 42px; } }
 
+/* ---------- Assinatura Swell Lab ---------- */
+.swl-credit { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; color: inherit; text-decoration: none !important; opacity: .7; transition: opacity .3s; }
+.swl-credit:hover, .swl-credit:focus-visible { opacity: 1; color: #fff; }
+.swl-credit span { font-size: 12px; letter-spacing: .02em; }
+.swl-credit .swl-mark { display: block; height: 12px; width: auto; overflow: visible; }
+.swl-credit .swl-ast { transform-box: fill-box; transform-origin: center; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.swl-credit:hover .swl-ast { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .swl-credit .swl-ast { transition: none; } }
